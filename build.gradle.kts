@@ -1,6 +1,7 @@
 @Suppress("DSL_SCOPE_VIOLATION") // https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
     alias(libs.plugins.algomate)
+    alias(libs.plugins.javafx)
 }
 
 exercise {
@@ -19,4 +20,13 @@ submission {
     requireTests = false
     // Optionally require public grader for mainBuildSubmission task. Default is false
     requireGraderPublic = false
+}
+
+javafx {
+    version = "17.0.1"
+    modules("javafx.controls", "javafx.fxml")
+}
+
+application {
+    mainClass.set("h13.SpaceInvaders")
 }
