@@ -157,6 +157,6 @@ public class EnemyMovement implements Updatable {
      */
     public void nextRound() {
         direction = INITIAL_ENEMY_MOVEMENT_DIRECTION;
-        yTarget = 0;
+        yTarget = HUD_HEIGHT;
     }
 }
