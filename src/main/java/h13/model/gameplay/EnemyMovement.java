@@ -121,7 +121,7 @@ public class EnemyMovement implements Updatable {
      * @param enemyBounds The BoundingBox of all alive enemies.
      * @return {@code true} if the target Position of the current movement iteration is reached, {@code false} otherwise.
      */
-    private boolean targetReached(final Bounds enemyBounds) {
+    public boolean targetReached(final Bounds enemyBounds) {
         return crash(); // TODO: H1.6 - remove if implemented
     }
 
@@ -138,7 +138,7 @@ public class EnemyMovement implements Updatable {
      * @param deltaX The deltaX.
      * @param deltaY The deltaY.
      */
-    private void updatePositions(final double deltaX, final double deltaY) {
+    public void updatePositions(final double deltaX, final double deltaY) {
         crash(); // TODO: H1.6 - remove if implemented
     }
 
@@ -147,7 +147,7 @@ public class EnemyMovement implements Updatable {
      *
      * @param enemyBounds The BoundingBox of all alive enemies.
      */
-    private void nextMovement(final Bounds enemyBounds) {
+    public void nextMovement(final Bounds enemyBounds) {
         crash(); // TODO: H1.6 - remove if implemented
     }
 

@@ -81,7 +81,7 @@ public class Player extends BattleShip {
      * @param name The player's new {@link #name}.
      * @see #name
      */
-    public void setName(final String name) {
+    public void setName(final @Nullable String name) {
         this.name = name;
     }
 

@@ -261,7 +261,7 @@ public class GameController extends SceneController implements Updatable {
     }
 
     /**
-     * Changes {@link #paused} to {@link false}.
+     * Changes {@link #paused} to {@code false}.
      */
     public void resume() {
         paused = false;
@@ -277,7 +277,7 @@ public class GameController extends SceneController implements Updatable {
     }
 
     /**
-     * Handles what happens when the {@linkplain Player player} is isDefeated.
+     * Handles what happens when the {@linkplain Player player} is Defeated.
      */
     private void lose() {
         crash(); // TODO: H3.1 - remove if implemented
