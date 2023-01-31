@@ -52,6 +52,6 @@ public class PlayerTest {
         SHOOT_METHOD.alwaysDoNothing(context, player);
 
         UPDATE_METHOD.invoke(context, player, 0);
-        SHOOT_METHOD.invoke(context, verify(player, Mockito.never().description(context.toString())), any(Direction.class));
+        SHOOT_METHOD.invokeWithoutCatching(context, verify(player, Mockito.never().description(context.toString())), any(Direction.class));
     }
 }
