@@ -139,6 +139,7 @@ public class BattleShipTest {
      *
      * @return a ArgumentSets containing all arguments for the test
      */
+    @SuppressWarnings("unused")
     private static ArgumentSets provideIsFriend() {
         ApplicationSettings.loadTexturesProperty().set(false);
         final List<BattleShip> ships = List.of(
