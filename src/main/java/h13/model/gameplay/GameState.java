@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * The GameState class is responsible for keeping track of the current state of the game.
+ * The {@link GameState} class is responsible for keeping track of the current state of the game.
  */
 public class GameState {
 

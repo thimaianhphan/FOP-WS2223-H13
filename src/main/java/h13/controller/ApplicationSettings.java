@@ -6,8 +6,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * A Data class that contains the ApplicationSettings.
- * Also handles Saving and Loading of the settings from the filesystem.
+ * A Data class that contains the settings of the application.
+ * Also handles saving and loading of the settings from the filesystem.
  */
 public final class ApplicationSettings {
     // --Constructors-- //

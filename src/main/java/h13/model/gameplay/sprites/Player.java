@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
- * A Player is a BattleShip that can only move horizontally and shoots upwards.
+ * A {@link Player} is a {@link BattleShip} that can only move horizontally and shoots upwards.
  */
 public class Player extends BattleShip {
 
@@ -32,7 +32,7 @@ public class Player extends BattleShip {
     // --Constructors-- //
 
     /**
-     * Creates a new player.
+     * Creates a new {@link Player}.
      *
      * @param x         The x-coordinate of the player.
      * @param y         The y-coordinate of the player.

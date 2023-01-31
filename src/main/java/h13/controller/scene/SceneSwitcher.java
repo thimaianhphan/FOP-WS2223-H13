@@ -10,36 +10,39 @@ import java.io.IOException;
 import java.util.concurrent.Callable;
 
 /**
- * A SceneSwitcher is responsible for switching between the different {@link Scene}s.
+ * A {@link SceneSwitcher} is responsible for switching between the different {@linkplain Scene scenes}.
  */
 public final class SceneSwitcher {
 
     // --Variables-- //
 
     /**
-     * An enum that represents the different scenes that can be switched to.
+     * An enum that represents the different {@linkplain Scene scenes} that can be switched to.
+     *
+     * @see Scene
+     * @see SceneAndController
      */
     public enum SceneType {
         // --Enum Constants-- //
 
         /**
-         * The main menu scene.
+         * The "Main Menu" scene.
          */
         MAIN_MENU(() -> SceneAndController.fromScene(new MainMenuScene())),
         /**
-         * The about scene.
+         * The "About" scene.
          */
         ABOUT(() -> SceneAndController.fromScene(new AboutScene())),
         /**
-         * The settings scene.
+         * The "Settings" scene.
          */
         SETTINGS(() -> SceneAndController.fromScene(new SettingsScene())),
         /**
-         * The highscore scene.
+         * The "Highscore" scene.
          */
         HIGHSCORE(() -> SceneAndController.fromScene(new HighscoreScene())),
         /**
-         * The game scene.
+         * The "Game" scene.
          */
         GAME(() -> SceneAndController.fromScene(new GameScene()));
 
@@ -53,7 +56,7 @@ public final class SceneSwitcher {
         // --Constructors-- //
 
         /**
-         * Creates a new SceneType.
+         * Creates a new {@link SceneType}.
          *
          * @param sacGenerator A Callable that creates a {@link SceneAndController} for this {@link SceneType}.
          */

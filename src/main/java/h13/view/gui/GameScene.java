@@ -12,7 +12,7 @@ import static h13.controller.GameConstants.ORIGINAL_GAME_BOUNDS;
 import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
- * A GameScene is a {@link Scene} that contains the {@link GameBoard} and is controlled by a {@link GameController}.
+ * A {@link GameScene} is a {@link Scene} that contains the {@link GameBoard} and is controlled by a {@link GameController}.
  */
 public class GameScene extends Scene implements ControlledScene<GameController> {
 

@@ -8,7 +8,9 @@ import static h13.controller.GameConstants.ENEMY_SHOOTING_PROBABILITY;
 import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
- * An Enemy is a BattleShip that is moved by the EnemyController and shoots downwards.
+ * An {@link Enemy} is a {@link BattleShip} that is moved by the {@link h13.controller.gamelogic.EnemyController} and shoots downwards.
+ *
+ * @see h13.model.gameplay.EnemyMovement
  */
 public class Enemy extends BattleShip {
     // --Variables-- //
@@ -56,7 +58,7 @@ public class Enemy extends BattleShip {
      *
      * @return The enemy's X-index of the enemy grid.
      */
-    public int getxIndex() {
+    public int getXIndex() {
         return xIndex;
     }
 
@@ -65,7 +67,7 @@ public class Enemy extends BattleShip {
      *
      * @return The enemy's Y-index of the enemy grid.
      */
-    public int getyIndex() {
+    public int getYIndex() {
         return yIndex;
     }
 

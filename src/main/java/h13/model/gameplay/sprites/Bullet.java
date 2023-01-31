@@ -11,7 +11,7 @@ import static h13.controller.GameConstants.*;
 import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
- * A Bullet is a Sprite that can be fired by a BattleShip and can canHit other BattleShips.
+ * A {@link Bullet} is a {@link Sprite} that can be fired by a {@link BattleShip} and can can hit other BattleShips.
  *
  * <ul>
  *   <li>A Bullet cannot damage itself, other Bullets, its owner or Friends of its owner.</li>
@@ -34,7 +34,7 @@ public class Bullet extends Sprite {
     // --Constructors-- //
 
     /**
-     * Creates a new Bullet.
+     * Creates a new {@link Bullet}.
      *
      * @param x         The initial x-coordinate of the Bullet.
      * @param y         The initial y-coordinate of the Bullet.

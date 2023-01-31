@@ -9,7 +9,7 @@ import static h13.controller.GameConstants.*;
 import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
- * An EnemyController is responsible for instantiating and updating the enemies.
+ * An {@link EnemyController} is responsible for instantiating and updating the {@linkplain Enemy enemies}.
  */
 @SuppressWarnings("ClassCanBeRecord")
 public final class EnemyController {
@@ -17,7 +17,7 @@ public final class EnemyController {
     // --Variables-- //
 
     /**
-     * The yOffset.
+     * The {@link GameController}.
      */
     private final GameController gameController;
 
@@ -26,7 +26,7 @@ public final class EnemyController {
     /**
      * Creates a new EnemyController.
      *
-     * @param gameController The game controller.
+     * @param gameController The {@linkplain GameController game controller}.
      */
     public EnemyController(
         final GameController gameController) {
@@ -50,9 +50,9 @@ public final class EnemyController {
 
 
     /**
-     * Checks whether all the {@link Enemy}s are dead.
+     * Checks whether all the {@linkplain  Enemy enemies} are dead.
      *
-     * @return {@code true} if all the {@link Enemy}s are dead, {@code false} otherwise.
+     * @return {@code true} if all the {@linkplain  Enemy enemies} are dead, {@code false} otherwise.
      * @see Enemy#isDead()
      */
     public boolean isDefeated() {
@@ -62,7 +62,7 @@ public final class EnemyController {
     // --Other Methods-- //
 
     /**
-     * Initialises the enemies for the next level, clearing the current enemies and adding new ones.
+     * Initialises the {@linkplain  Enemy enemies} for the next level, clearing the current enemies and adding new ones.
      * Also resets the {@link EnemyMovement} using {@link EnemyMovement#nextRound()}.
      */
     public void nextLevel() {

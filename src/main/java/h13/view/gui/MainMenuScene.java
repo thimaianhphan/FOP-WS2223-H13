@@ -36,7 +36,7 @@ public class MainMenuScene extends MenuScene<MainMenuController> {
         final Label titleLabel = new Label("Space Invaders");
         titleLabel.setFont(GameConstants.TITLE_FONT);
         titleLabel.setPadding(new Insets(20, 20, 20, 20));
-        // StarWars like perspective effect
+        // StarWars-like perspective effect
 //        PerspectiveTransform pt = new PerspectiveTransform(
 //            10.0f,
 //            10.0f,

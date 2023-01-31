@@ -8,23 +8,24 @@ import static h13.controller.GameConstants.ORIGINAL_GAME_BOUNDS;
 import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
- * A Utils class containing utility methods.
+ * A {@link Utils} class containing utility methods.
  */
 public class Utils {
 
     /**
-     * Returns the closest position for the given Bounds that is within the game bounds.
+     * Returns the closest position for the given {@link Bounds} that is within the game bounds.
      *
      * @param bounds The bounds to be clamped.
      * @return the clamped coordinate.
      * @see <a href="https://en.wikipedia.org/wiki/Clamping_(graphics)">Clamping_(graphics)</a>
+     * @see h13.controller.GameConstants
      */
     public static Bounds clamp(final Bounds bounds) {
         return crash(); // TODO: H1.1 - remove if implemented
     }
 
     /**
-     * Returns the Moved Bounding Box for the given Bounds, Direction, velocity and time.
+     * Returns the Moved Bounding Box for the given {@link Bounds}, {@link Direction}, velocity and time.
      *
      * @param bounds      The bounds to be moved.
      * @param velocity    The velocity of the movement.

@@ -8,7 +8,7 @@ import javafx.scene.layout.Region;
 /**
  * The {@link MenuScene} is a {@link Scene} that is controlled by a {@link SceneController} which displays a Menu.
  *
- * @param <SC> The type of the SceneController.
+ * @param <SC> The type of the {@link SceneController}.
  */
 public abstract class MenuScene<SC extends SceneController> extends Scene implements ControlledScene<SC> {
 

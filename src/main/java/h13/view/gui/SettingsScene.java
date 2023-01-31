@@ -6,7 +6,7 @@ import javafx.scene.control.*;
 import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
- * The {@link SettingsScene} is a {@link SubMenuScene} that displays the settings menu.
+ * The {@link SettingsScene} is a {@link SubMenuScene} that displays the "Settings" menu.
  */
 public class SettingsScene extends SubMenuScene<SettingsController, TabPane> {
 

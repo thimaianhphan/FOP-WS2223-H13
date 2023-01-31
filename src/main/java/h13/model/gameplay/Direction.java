@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 /**
- * A Direction is a type of {@linkplain Enum} that represents an orthogonal direction on a 2D plane.
+ * A {@link Direction} is a type of {@linkplain Enum} that represents an orthogonal direction on a 2D plane.
  *
  * @author Ruben Deisenroth
  */
@@ -62,7 +62,7 @@ public enum Direction {
     // --Constructors-- //
 
     /**
-     * Creates a new direction.
+     * Creates a new {@link Direction} .
      *
      * @param x The x-component of the direction.
      * @param y The y-component of the direction.

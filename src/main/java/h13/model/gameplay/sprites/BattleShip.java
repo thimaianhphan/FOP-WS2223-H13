@@ -9,7 +9,7 @@ import static h13.controller.GameConstants.*;
 import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
- * A BattleShip is a Sprite that can shoot and be friends or enemies with other BattleShips.
+ * A {@link BattleShip} is a {@link Sprite} that can shoot {@linkplain Bullet bullets} and be friends or {@linkplain Enemy enemies} with other BattleShips.
  */
 public class BattleShip extends Sprite {
     // --Variables-- //
@@ -22,7 +22,7 @@ public class BattleShip extends Sprite {
     // --Constructors-- //
 
     /**
-     * Creates a new BattleShip.
+     * Creates a new {@link BattleShip}.
      *
      * @param x         The x-coordinate of the BattleShip.
      * @param y         The y-coordinate of the BattleShip.

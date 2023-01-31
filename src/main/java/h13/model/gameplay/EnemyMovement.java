@@ -6,7 +6,7 @@ import static h13.controller.GameConstants.*;
 import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
- * The EnemyMovement class is responsible for moving the enemies in a grid.
+ * The {@link EnemyMovement} class is responsible for moving the {@linkplain h13.model.gameplay.sprites.Enemy enemies} in a grid.
  */
 public class EnemyMovement implements Updatable {
 

@@ -1,7 +1,10 @@
 package h13.controller.scene;
 
 /**
- * An interface for a controlled scene.
+ * An interface for a {@linkplain ControlledScene controlled scene}.
+ *
+ * @see javafx.scene.Scene
+ * @see SceneController
  */
 public interface ControlledScene<SC extends SceneController> {
     /**

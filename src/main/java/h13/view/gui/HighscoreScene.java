@@ -6,7 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 /**
- * The {@link HighscoreScene} is a {@link SubMenuScene} that displays the highscore.
+ * The {@link HighscoreScene} is a {@link SubMenuScene} that displays the table of highscores.
  */
 public class HighscoreScene extends SubMenuScene<HighscoreController, TableView<HighscoreEntry>> {
 

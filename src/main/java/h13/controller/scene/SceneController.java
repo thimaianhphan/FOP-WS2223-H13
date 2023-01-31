@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * A SceneController is responsible for dynamically managing a {@link Scene} and its {@link Stage}.
+ * A {@link SceneController} is responsible for dynamically managing a {@link Scene} and its {@link Stage}.
  */
 public abstract class SceneController {
     // --Variables-- //

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * A GameInputHandler is responsible for handling the input from the user on a {@link h13.view.gui.GameScene}.
+ * A {@link GameInputHandler} is responsible for handling the input from the user on a {@link h13.view.gui.GameScene}.
  */
 public class GameInputHandler {
     // --Variables-- //
@@ -23,7 +23,7 @@ public class GameInputHandler {
     private final Set<KeyCode> keysPressed = new HashSet<>();
 
     /**
-     * A List of event handlers that are called when a key is pressed.
+     * A List of {@linkplain EventHandler event handlers} that are called when a key is pressed.
      */
     private final List<EventHandler<KeyEvent>> onKeyPressed = new ArrayList<>();
 
@@ -40,7 +40,7 @@ public class GameInputHandler {
     // --Constructors-- //
 
     /**
-     * Creates a new GameInputHandler.
+     * Creates a new {@link GameInputHandler}.
      *
      * @param scene The scene to handle input for.
      */

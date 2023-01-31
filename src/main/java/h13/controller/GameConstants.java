@@ -7,11 +7,11 @@ import javafx.geometry.Bounds;
 import javafx.scene.paint.Color;
 
 /**
- * The GameConstants class contains all the constants that are used in the game.
+ * The {@link GameConstants} class contains all the constants that are used in the game.
  */
 public final class GameConstants {
     /**
-     * The Bounds of the original game screen.
+     * The {@link Bounds} of the original game screen.
      */
     public static Bounds ORIGINAL_GAME_BOUNDS = new BoundingBox(
         0,
@@ -24,13 +24,14 @@ public final class GameConstants {
      * The aspect ratio
      */
     public static double ASPECT_RATIO = ORIGINAL_GAME_BOUNDS.getWidth() / ORIGINAL_GAME_BOUNDS.getHeight();
+    
     /**
-     * The Amount of enemy rows.
+     * The amount of enemy rows.
      */
     public static int ENEMY_ROWS = 5;
 
     /**
-     * The Amount of enemy columns.
+     * The amount of enemy columns.
      */
     public static int ENEMY_COLS = 11;
 
@@ -50,14 +51,15 @@ public final class GameConstants {
     public static double ENEMY_MOVEMENT_SPEED_INCREASE = 0.3;
 
     /**
-     * The relative Amount of padding between the enemies.
+     * The relative amount of padding between the enemies.
      */
-    public static double SHIP_PADING = 0.01;
+    public static double SHIP_PADDING = 0.01;
 
     /**
      * The relative horizontal movement distance.
      */
     public static double HORIZONTAL_ENEMY_MOVE_DISTANCE = 0.1;
+    
     /**
      * The vertical movement distance.
      */
@@ -66,7 +68,6 @@ public final class GameConstants {
     /**
      * The amount of Pixels that the enemies move horizontally each movement iteration.
      */
-
     public static double HORIZONTAL_ENEMY_MOVE_SPACE = ORIGINAL_GAME_BOUNDS.getWidth() * (1 - HORIZONTAL_ENEMY_MOVE_DISTANCE);
 
     /**
@@ -77,7 +78,7 @@ public final class GameConstants {
     /**
      * The relative ship width.
      */
-    public static double RELATIVE_SHIP_SIZE = (1d - HORIZONTAL_ENEMY_MOVE_DISTANCE) / ENEMY_COLS - 2 * SHIP_PADING;
+    public static double RELATIVE_SHIP_SIZE = (1d - HORIZONTAL_ENEMY_MOVE_DISTANCE) / ENEMY_COLS - 2 * SHIP_PADDING;
 
     /**
      * The ship width.

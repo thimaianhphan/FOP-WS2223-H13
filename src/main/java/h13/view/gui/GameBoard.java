@@ -16,7 +16,7 @@ import static org.tudalgo.algoutils.student.Student.crash;
 
 
 /**
- * A GameBoard is a {@link Canvas} on which the
+ * A {@link GameBoard} is a {@link Canvas} on which the
  * {@link h13.model.gameplay.sprites.Sprite}s as well as the HUD are drawn.
  * It is part of the {@link GameScene} and is controlled by a
  * {@link GameController}.

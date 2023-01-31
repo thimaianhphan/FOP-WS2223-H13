@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
- * A SpriteRenderer is responsible for rendering a {@link Sprite} on a {@link GraphicsContext}.
+ * A {@link SpriteRenderer} is responsible for rendering a {@link Sprite} on a {@link GraphicsContext}.
  */
 public final class SpriteRenderer {
     // --Constructors-- //

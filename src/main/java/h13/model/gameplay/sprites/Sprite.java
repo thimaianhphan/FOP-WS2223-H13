@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
- * A sprite is a game object that can be placed on the game board.
+ * A {@link Sprite} is a game object that can be placed on the {@link h13.view.gui.GameBoard}.
  */
 public abstract class Sprite implements Updatable {
 

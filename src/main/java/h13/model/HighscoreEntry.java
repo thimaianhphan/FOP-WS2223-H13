@@ -4,7 +4,9 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- * A Data class that represents a highscore entry.
+ * A Data class that represents a "Highscore" entry.
+ *
+ * @see h13.view.gui.HighscoreScene
  */
 public class HighscoreEntry {
 
