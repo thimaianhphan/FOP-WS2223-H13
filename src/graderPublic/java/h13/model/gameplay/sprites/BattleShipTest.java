@@ -107,8 +107,8 @@ public class BattleShipTest {
             context,
             r -> "Ship.setBullet() was not called twice"
         );
-        assertTrue(state.getToAdd().contains(firstBullet), context, r -> "Orignal Bullet was removed but should not have been");
-        assertTrue(state.getSprites().contains(firstBullet), context, r -> "Orignal Bullet was removed but should not have been");
+        assertTrue(state.getToAdd().contains(firstBullet), context, r -> "Original Bullet was removed but should not have been");
+        assertTrue(state.getSprites().contains(firstBullet), context, r -> "Original Bullet was removed but should not have been");
         DIE_METHOD.verify(context, firstBullet, never());
     }
 
