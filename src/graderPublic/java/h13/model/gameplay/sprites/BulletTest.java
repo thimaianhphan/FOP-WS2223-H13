@@ -87,9 +87,9 @@ public class BulletTest {
         DAMAGE_METHOD_WITH_AMOUNT.alwaysDoNothing(context, bullet);
         DAMAGE_METHOD_WITH_AMOUNT.alwaysDoNothing(context, toHit);
 
-        assertTrue(bullet.canHit(toHit), context, r -> String.format("The bullet should be able to hit the ship at position %d", position));
+        assertTrue(bullet.canHit(toHit), context, r -> String.format("The bullet should be able to hit the ship at position (%d,%d)", position, position));
         HIT_METHOD.invoke(context, bullet, toHit);
-        assertFalse(bullet.canHit(toHit), context, r -> String.format("The bullet should not be able to hit the ship at position %d", position));
+        assertFalse(bullet.canHit(toHit), context, r -> String.format("The bullet should not be able to hit the ship at position (%d,%d), because the ship has been hit already", position, position));
     }
 
     @Test
