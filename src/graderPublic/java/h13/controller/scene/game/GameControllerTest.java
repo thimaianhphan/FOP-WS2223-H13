@@ -12,7 +12,6 @@ import h13.model.gameplay.sprites.*;
 import h13.util.StudentLinks;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.mockito.Answers;
 import org.mockito.Mockito;

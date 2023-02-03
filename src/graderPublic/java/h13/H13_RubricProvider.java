@@ -1,6 +1,5 @@
 package h13;
 
-import h13.controller.gamelogic.EnemyControllerTest;
 import h13.controller.gamelogic.PlayerControllerTest;
 import h13.controller.scene.game.GameControllerTest;
 import h13.json.JsonParameterSet;
@@ -11,7 +10,6 @@ import h13.shared.UtilsTest;
 import h13.view.gui.GameBoardTest;
 import h13.view.gui.GameSceneTest;
 import h13.view.gui.SpriteRendererTest;
-import javafx.geometry.Bounds;
 import org.sourcegrade.jagr.api.rubric.Criterion;
 import org.sourcegrade.jagr.api.rubric.JUnitTestRef;
 import org.sourcegrade.jagr.api.rubric.Rubric;

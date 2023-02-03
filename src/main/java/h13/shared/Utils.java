@@ -5,7 +5,6 @@ import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 
 import static h13.controller.GameConstants.ORIGINAL_GAME_BOUNDS;
-import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
  * A {@link Utils} class containing utility methods.
@@ -21,7 +20,22 @@ public class Utils {
      * @see h13.controller.GameConstants
      */
     public static Bounds clamp(final Bounds bounds) {
-        return crash(); // TODO: H1.1 - remove if implemented
+        if (ORIGINAL_GAME_BOUNDS.contains(bounds)) return new BoundingBox(bounds.getMinX(), bounds.getMinY(), bounds.getWidth(), bounds.getHeight());
+//        else if (bounds.getHeight() > ORIGINAL_GAME_BOUNDS.getHeight() || bounds.getWidth() > ORIGINAL_GAME_BOUNDS.getWidth()) return null;
+        else {
+            double newMinX, newMinY;
+            if (bounds.getMinX() < ORIGINAL_GAME_BOUNDS.getMinX()) newMinX = ORIGINAL_GAME_BOUNDS.getMinX();
+            else if (bounds.getMinX() + bounds.getWidth() >= ORIGINAL_GAME_BOUNDS.getMinX() + ORIGINAL_GAME_BOUNDS.getWidth())
+                newMinX = ORIGINAL_GAME_BOUNDS.getMinX() + ORIGINAL_GAME_BOUNDS.getWidth() - 1 - bounds.getWidth();
+            else newMinX = bounds.getMinX();
+
+            if (bounds.getMinY() < ORIGINAL_GAME_BOUNDS.getMinY()) newMinY = ORIGINAL_GAME_BOUNDS.getMinY();
+            else if (bounds.getMinY() + bounds.getHeight() >= ORIGINAL_GAME_BOUNDS.getMinY() + ORIGINAL_GAME_BOUNDS.getHeight())
+                newMinY = ORIGINAL_GAME_BOUNDS.getMinY() + ORIGINAL_GAME_BOUNDS.getHeight() - 1 - bounds.getHeight();
+            else newMinY = bounds.getMinY();
+
+            return new BoundingBox(newMinX, newMinY, bounds.getWidth(), bounds.getHeight());
+        }
     }
 
     /**
@@ -34,6 +48,8 @@ public class Utils {
      * @return the moved bounds
      */
     public static Bounds getNextPosition(final Bounds bounds, final double velocity, final Direction direction, final double elapsedTime) {
-        return crash(); // TODO: H1.1 - remove if implemented
+        double newMinX = bounds.getMinX() + velocity * direction.getX() * elapsedTime;
+        double newMinY = bounds.getMinY() + velocity * direction.getY() * elapsedTime;
+        return new BoundingBox(newMinX, newMinY, bounds.getWidth(), bounds.getHeight());
     }
 }

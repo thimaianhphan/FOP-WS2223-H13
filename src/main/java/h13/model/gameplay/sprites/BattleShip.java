@@ -1,10 +1,13 @@
 package h13.model.gameplay.sprites;
 
+import h13.controller.ApplicationSettings;
 import h13.model.gameplay.Direction;
 import h13.model.gameplay.GameState;
+import h13.shared.Utils;
 import javafx.scene.paint.Color;
 import org.jetbrains.annotations.Nullable;
 
+import static h13.controller.ApplicationSettings.instantShootingProperty;
 import static h13.controller.GameConstants.*;
 import static org.tudalgo.algoutils.student.Student.crash;
 
@@ -103,6 +106,13 @@ public class BattleShip extends Sprite {
      * @param direction The {@link Direction} to shoot the {@link Bullet} towards.
      */
     protected void shoot(final Direction direction) {
-        crash(); // TODO: H1.3 - remove if implemented
+        if (hasBullet() && ApplicationSettings.instantShootingProperty().get()) {
+            Bullet newBullet = new Bullet((getX() + getWidth()) / 2.0, (getY() + getHeight()) / 2.0, getGameState(), this, direction);
+            getBullet().getGameState().getToAdd().add(newBullet);
+            getBullet().setDirection(direction);
+        } else if (!hasBullet()) {
+            Bullet newBullet = new Bullet((getX() + getWidth()) / 2.0, (getY() + getHeight()) / 2.0, getGameState(), this, direction);
+
+        }
     }
 }

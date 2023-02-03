@@ -10,18 +10,13 @@ import h13.json.JsonConverter;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junitpioneer.jupiter.cartesian.ArgumentSets;
-import org.junitpioneer.jupiter.cartesian.CartesianTest;
 import org.sourcegrade.jagr.api.rubric.TestForSubmission;
 import org.tudalgo.algoutils.tutor.general.assertions.Context;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-import static h13.controller.GameConstants.ORIGINAL_GAME_BOUNDS;
 import static org.tudalgo.algoutils.tutor.general.assertions.Assertions2.*;
 
 @TestForSubmission

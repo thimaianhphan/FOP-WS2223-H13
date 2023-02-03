@@ -2,13 +2,14 @@ package h13.model.gameplay.sprites;
 
 import h13.model.gameplay.Direction;
 import h13.model.gameplay.GameState;
+import h13.shared.Utils;
+import javafx.geometry.Bounds;
 import javafx.scene.paint.Color;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static h13.controller.GameConstants.*;
-import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
  * A {@link Bullet} is a {@link Sprite} that can be fired by a {@link BattleShip} and can can hit other BattleShips.
@@ -77,7 +78,9 @@ public class Bullet extends Sprite {
      * @return True if the Bullet can damage the given Sprite.
      */
     public boolean canHit(final BattleShip other) {
-        return crash(); // TODO: H1.2 - remove if implemented
+        if (getOwner().isEnemy(other) && other.isAlive() && hits.contains(other)) {
+            return getOwner().getBounds().intersects(other.getBounds());
+        } else return false;
     }
 
     /**
@@ -86,8 +89,19 @@ public class Bullet extends Sprite {
      * @param other The BattleShip to hit.
      */
     public void hit(final BattleShip other) {
-        crash(); // TODO: H1.2 - remove if implemented
+        if (getHealth() > 0 && isAlive()) {
+            other.damage();
+            damage();
+            hits.add(other);
+        }
     }
 
     // TODO: Check if the Bullet is out of bounds and die if it is.
+    @Override
+    public void update(final double elapsedTime) {
+        Bounds newBounds = Utils.getNextPosition(getBounds(), getVelocity(), getDirection(), elapsedTime);
+        double new_x = newBounds.getMinX(), new_y = newBounds.getMinY();
+        if (new_x >= getBounds().getWidth() - 1 || new_x < getX() || new_y < getY() || new_y >= getBounds().getHeight() - 1)
+            die();
+    }
 }
