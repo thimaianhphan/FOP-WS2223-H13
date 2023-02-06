@@ -73,7 +73,7 @@ public class GameScene extends Scene implements ControlledScene<GameController> 
      */
     protected void init() {
         // Game Board
-        initGameboard();
+        initGameBoard();
 
         // Game Controller
         gameController = new GameController(this);
@@ -82,7 +82,7 @@ public class GameScene extends Scene implements ControlledScene<GameController> 
     /**
      * Initializes the GameBoard, binding its size to the size of the Scene.
      */
-    private void initGameboard() {
+    private void initGameBoard() {
         gameBoard = new GameBoard(ORIGINAL_GAME_BOUNDS.getWidth(), ORIGINAL_GAME_BOUNDS.getHeight(), this);
 
         // Size
