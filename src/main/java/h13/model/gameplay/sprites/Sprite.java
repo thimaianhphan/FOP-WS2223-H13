@@ -1,6 +1,7 @@
 package h13.model.gameplay.sprites;
 
 import h13.controller.ApplicationSettings;
+import h13.controller.GameConstants;
 import h13.model.gameplay.Direction;
 import h13.model.gameplay.GameState;
 import h13.model.gameplay.Updatable;
@@ -362,6 +363,8 @@ public abstract class Sprite implements Updatable {
     @Override
     public void update(final double elapsedTime) {
         Bounds newBounds = Utils.getNextPosition(getBounds(), getVelocity(), getDirection(), elapsedTime);
-        Utils.clamp(newBounds);
+        newBounds = Utils.clamp(newBounds);
+        setX(newBounds.getMinX());
+        setY(newBounds.getMinY());
     }
 }

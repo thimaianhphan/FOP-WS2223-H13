@@ -1,5 +1,6 @@
 package h13.model.gameplay.sprites;
 
+import h13.controller.GameConstants;
 import h13.model.gameplay.Direction;
 import h13.model.gameplay.GameState;
 import h13.shared.Utils;
@@ -31,6 +32,7 @@ public class Bullet extends Sprite {
      * The set of BattleShips that have been damaged by the Bullet.
      */
     private final Set<Sprite> hits = new HashSet<>();
+//    private boolean hasHit = true;
 
     // --Constructors-- //
 
@@ -78,8 +80,8 @@ public class Bullet extends Sprite {
      * @return True if the Bullet can damage the given Sprite.
      */
     public boolean canHit(final BattleShip other) {
-        if (getOwner().isEnemy(other) && other.isAlive() && hits.contains(other)) {
-            return getOwner().getBounds().intersects(other.getBounds());
+        if (getOwner().isEnemy(other) && other.isAlive() && !getHits().contains(other)) {
+            return getBounds().intersects(other.getX(), other.getY(), other.getWidth(), other.getHeight());
         } else return false;
     }
 
@@ -92,7 +94,7 @@ public class Bullet extends Sprite {
         if (getHealth() > 0 && isAlive()) {
             other.damage();
             damage();
-            hits.add(other);
+            getHits().add(other);
         }
     }
 
@@ -101,7 +103,12 @@ public class Bullet extends Sprite {
     public void update(final double elapsedTime) {
         Bounds newBounds = Utils.getNextPosition(getBounds(), getVelocity(), getDirection(), elapsedTime);
         double new_x = newBounds.getMinX(), new_y = newBounds.getMinY();
-        if (new_x >= getBounds().getWidth() - 1 || new_x < getX() || new_y < getY() || new_y >= getBounds().getHeight() - 1)
+        if (new_x >= ORIGINAL_GAME_BOUNDS.getWidth() || new_x < ORIGINAL_GAME_BOUNDS.getMinX()
+            || new_y < ORIGINAL_GAME_BOUNDS.getMinY() || new_y >= ORIGINAL_GAME_BOUNDS.getHeight()) {
             die();
+            return;
+        }
+        setX(new_x);
+        setY(new_y);
     }
 }

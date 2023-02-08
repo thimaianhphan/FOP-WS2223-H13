@@ -1,15 +1,13 @@
 package h13.model.gameplay.sprites;
 
 import h13.controller.ApplicationSettings;
+import h13.controller.GameConstants;
 import h13.model.gameplay.Direction;
 import h13.model.gameplay.GameState;
-import h13.shared.Utils;
 import javafx.scene.paint.Color;
 import org.jetbrains.annotations.Nullable;
 
-import static h13.controller.ApplicationSettings.instantShootingProperty;
 import static h13.controller.GameConstants.*;
-import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
  * A {@link BattleShip} is a {@link Sprite} that can shoot {@linkplain Bullet bullets} and be friends or {@linkplain Enemy enemies} with other BattleShips.
@@ -85,7 +83,7 @@ public class BattleShip extends Sprite {
      * @return {@code true} if the given {@link BattleShip} is befriended with this Ship, {@code false} otherwise.
      */
     public boolean isFriend(final BattleShip other) {
-        return crash(); // TODO: H1.3 - remove if implemented
+        return this.getClass().isInstance(other);
     }
 
     /**
@@ -107,12 +105,12 @@ public class BattleShip extends Sprite {
      */
     protected void shoot(final Direction direction) {
         if (hasBullet() && ApplicationSettings.instantShootingProperty().get()) {
-            Bullet newBullet = new Bullet((getX() + getWidth()) / 2.0, (getY() + getHeight()) / 2.0, getGameState(), this, direction);
-            getBullet().getGameState().getToAdd().add(newBullet);
-            getBullet().setDirection(direction);
+            Bullet newBullet = new Bullet((getX() + getWidth() - BULLET_WIDTH) / 2.0, (getY() + getHeight() - BULLET_HEIGHT) / 2.0, getGameState(), this, direction);
+            getGameState().getToAdd().add(newBullet);
         } else if (!hasBullet()) {
-            Bullet newBullet = new Bullet((getX() + getWidth()) / 2.0, (getY() + getHeight()) / 2.0, getGameState(), this, direction);
-
+            Bullet newBullet = new Bullet((getX() + getWidth() - BULLET_WIDTH) / 2.0, (getY() + getHeight() - BULLET_HEIGHT) / 2.0, getGameState(), this, direction);
+            setBullet(newBullet);
+            getGameState().getToAdd().add(newBullet);
         }
     }
 }

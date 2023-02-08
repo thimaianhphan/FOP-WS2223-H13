@@ -1,11 +1,12 @@
 package h13.model.gameplay.sprites;
 
+import h13.controller.ApplicationSettings;
 import h13.model.gameplay.Direction;
 import h13.model.gameplay.GameState;
 import javafx.scene.paint.Color;
+import java.util.concurrent.TimeUnit;
 
 import static h13.controller.GameConstants.ENEMY_SHOOTING_PROBABILITY;
-import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
  * An {@link Enemy} is a {@link BattleShip} that is moved by the {@link h13.controller.gamelogic.EnemyController} and shoots downwards.
@@ -95,7 +96,13 @@ public class Enemy extends BattleShip {
     @Override
     public void update(final double elapsedTime) {
         super.update(elapsedTime);
-
-        crash(); // TODO: H1.4 - remove if implemented
+        try {
+            if (Math.random() <= ApplicationSettings.enemyShootingProbability.get()) {
+                TimeUnit.MILLISECONDS.sleep(ApplicationSettings.enemyShootingDelayProperty().longValue());
+                shoot();
+            }
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
     }
 }

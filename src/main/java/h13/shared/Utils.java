@@ -26,12 +26,12 @@ public class Utils {
             double newMinX, newMinY;
             if (bounds.getMinX() < ORIGINAL_GAME_BOUNDS.getMinX()) newMinX = ORIGINAL_GAME_BOUNDS.getMinX();
             else if (bounds.getMinX() + bounds.getWidth() >= ORIGINAL_GAME_BOUNDS.getMinX() + ORIGINAL_GAME_BOUNDS.getWidth())
-                newMinX = ORIGINAL_GAME_BOUNDS.getMinX() + ORIGINAL_GAME_BOUNDS.getWidth() - 1 - bounds.getWidth();
+                newMinX = ORIGINAL_GAME_BOUNDS.getMinX() + ORIGINAL_GAME_BOUNDS.getWidth() - bounds.getWidth();
             else newMinX = bounds.getMinX();
 
             if (bounds.getMinY() < ORIGINAL_GAME_BOUNDS.getMinY()) newMinY = ORIGINAL_GAME_BOUNDS.getMinY();
             else if (bounds.getMinY() + bounds.getHeight() >= ORIGINAL_GAME_BOUNDS.getMinY() + ORIGINAL_GAME_BOUNDS.getHeight())
-                newMinY = ORIGINAL_GAME_BOUNDS.getMinY() + ORIGINAL_GAME_BOUNDS.getHeight() - 1 - bounds.getHeight();
+                newMinY = ORIGINAL_GAME_BOUNDS.getMinY() + ORIGINAL_GAME_BOUNDS.getHeight() - bounds.getHeight();
             else newMinY = bounds.getMinY();
 
             return new BoundingBox(newMinX, newMinY, bounds.getWidth(), bounds.getHeight());

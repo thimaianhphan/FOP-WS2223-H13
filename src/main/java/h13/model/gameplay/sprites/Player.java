@@ -140,7 +140,6 @@ public class Player extends BattleShip {
     @Override
     public void update(final double elapsedTime) {
         super.update(elapsedTime);
-
-       crash(); // TODO: H1.5 - remove if implemented
+        if (isKeepShooting()) shoot();
     }
 }
