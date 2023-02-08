@@ -191,7 +191,7 @@ public class H13_RubricProvider implements RubricProvider {
                                 JUnitTestRef.ofMethod(() -> GameSceneTest.class.getDeclaredMethod("testCentering", JsonParameterSet.class))
                             ),
                             Criterion.builder()
-                                .shortDescription("Die Methode initGameboard() ist vollständig korrekt.")
+                                .shortDescription("Die Methode initGameBoard() ist vollständig korrekt.")
                                 .grader(graderPrivateOnly())
                                 .minPoints(0)
                                 .maxPoints(1)
