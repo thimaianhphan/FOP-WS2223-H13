@@ -9,7 +9,6 @@ import javafx.scene.paint.Color;
 
 import static h13.controller.GameConstants.ASPECT_RATIO;
 import static h13.controller.GameConstants.ORIGINAL_GAME_BOUNDS;
-import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
  * A {@link GameScene} is a {@link Scene} that contains the {@link GameBoard} and is controlled by a {@link GameController}.
@@ -86,9 +85,17 @@ public class GameScene extends Scene implements ControlledScene<GameController> 
         gameBoard = new GameBoard(ORIGINAL_GAME_BOUNDS.getWidth(), ORIGINAL_GAME_BOUNDS.getHeight(), this);
 
         // Size
-        crash(); // TODO: H2.1 - remove if implemented
+        if (widthProperty().divide(ASPECT_RATIO).lessThanOrEqualTo(heightProperty()).get()) {
+            gameBoard.widthProperty().bind(widthProperty());
+            gameBoard.heightProperty().bind(Bindings.divide(widthProperty(), ASPECT_RATIO));
+        } else {
+            gameBoard.widthProperty().bind(Bindings.multiply(heightProperty(), ASPECT_RATIO));
+            gameBoard.heightProperty().bind(heightProperty());
+        }
+
         // Positioning
-        crash(); // TODO: H2.1 - remove if implemented
+        gameBoard.translateXProperty().set(Bindings.divide(widthProperty().subtract(gameBoard.widthProperty()), 2).doubleValue());
+        gameBoard.translateYProperty().set(Bindings.divide(heightProperty().subtract(gameBoard.heightProperty()), 2).doubleValue());
 
         root.getChildren().add(gameBoard);
     }

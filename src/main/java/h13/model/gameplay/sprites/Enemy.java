@@ -28,6 +28,7 @@ public class Enemy extends BattleShip {
      * The amount of points the enemy is worth when it is destroyed.
      */
     private final int pointsWorth;
+    private long timeOfLastShot = 0;
 
     // --Constructors-- //
 
@@ -96,13 +97,11 @@ public class Enemy extends BattleShip {
     @Override
     public void update(final double elapsedTime) {
         super.update(elapsedTime);
-        try {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - timeOfLastShot >= ApplicationSettings.enemyShootingDelayProperty().longValue())
             if (Math.random() <= ApplicationSettings.enemyShootingProbability.get()) {
-                TimeUnit.MILLISECONDS.sleep(ApplicationSettings.enemyShootingDelayProperty().longValue());
+                timeOfLastShot = System.currentTimeMillis();
                 shoot();
-            }
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
         }
     }
 }

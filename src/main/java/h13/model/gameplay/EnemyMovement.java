@@ -1,9 +1,13 @@
 package h13.model.gameplay;
 
+import h13.model.gameplay.sprites.Enemy;
+import h13.shared.Utils;
+import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 
+import java.util.Iterator;
+
 import static h13.controller.GameConstants.*;
-import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
  * The {@link EnemyMovement} class is responsible for moving the {@linkplain h13.model.gameplay.sprites.Enemy enemies} in a grid.
@@ -85,6 +89,12 @@ public class EnemyMovement implements Updatable {
     public void setDirection(final Direction direction) {
         this.direction = direction;
     }
+    public double getYTarget() {
+        return yTarget;
+    }
+    public void setYTarget(final double yTarget) {
+        this.yTarget += yTarget;
+    }
 
     /**
      * Checks whether the bottom was reached.
@@ -92,7 +102,7 @@ public class EnemyMovement implements Updatable {
      * @return {@code true} if the bottom was reached, {@code false} otherwise.
      */
     public boolean bottomWasReached() {
-        return crash(); // TODO: H1.6 - remove if implemented
+        return getEnemyBounds().getMaxY() >= ORIGINAL_GAME_BOUNDS.getMaxY();
     }
 
     /**
@@ -112,7 +122,17 @@ public class EnemyMovement implements Updatable {
      * @return The BoundingBox.
      */
     public Bounds getEnemyBounds() {
-        return crash(); // TODO: H1.6 - remove if implemented
+        Iterator<Enemy> enemyIterator = getGameState().getAliveEnemies().iterator();
+        double min_x = ORIGINAL_GAME_BOUNDS.getWidth(), min_y = ORIGINAL_GAME_BOUNDS.getHeight(),
+            max_x = ORIGINAL_GAME_BOUNDS.getMinX(), max_y = ORIGINAL_GAME_BOUNDS.getMinY();
+        do {
+            Enemy enemy = enemyIterator.next();
+            min_x = Math.min(min_x, enemy.getX());
+            min_y = Math.min(min_y, enemy.getY());
+            max_x = Math.max(max_x, enemy.getX() + enemy.getWidth());
+            max_y = Math.max(max_y, enemy.getY() + enemy.getHeight());
+        } while (enemyIterator.hasNext());
+        return new BoundingBox(min_x, min_y, max_x - min_x, max_y - min_y);
     }
 
     /**
@@ -122,14 +142,25 @@ public class EnemyMovement implements Updatable {
      * @return {@code true} if the target Position of the current movement iteration is reached, {@code false} otherwise.
      */
     public boolean targetReached(final Bounds enemyBounds) {
-        return crash(); // TODO: H1.6 - remove if implemented
+        return enemyBounds.getMinY() == getYTarget() &&
+            (enemyBounds.getMinX() == ORIGINAL_GAME_BOUNDS.getMinX() && (getDirection() == Direction.LEFT || getDirection() == Direction.DOWN)
+            || enemyBounds.getMaxX() == ORIGINAL_GAME_BOUNDS.getMaxX() && (getDirection() == Direction.DOWN || getDirection() == Direction.RIGHT));
     }
 
     // --Movement-- //
 
     @Override
     public void update(final double elapsedTime) {
-        crash(); // TODO: H1.6 - remove if implemented
+        Bounds bounding = getEnemyBounds();
+        if (!bottomWasReached()) {
+            if (targetReached(bounding)) nextMovement(bounding);
+            else {
+                Bounds nextPos = Utils.getNextPosition(bounding, getVelocity(), getDirection(), elapsedTime);
+                Bounds nextPosClamp = Utils.clamp(nextPos);
+                updatePositions(nextPosClamp.getMinX() - bounding.getMinX(), nextPosClamp.getMinY() - bounding.getMinY());
+                targetReached(nextPosClamp);
+            }
+        }
     }
 
     /**
@@ -139,7 +170,10 @@ public class EnemyMovement implements Updatable {
      * @param deltaY The deltaY.
      */
     public void updatePositions(final double deltaX, final double deltaY) {
-        crash(); // TODO: H1.6 - remove if implemented
+        getGameState().getAliveEnemies().forEach(e -> {
+            e.setX(e.getX() + deltaX);
+            e.setY(e.getY() + deltaY);
+        });
     }
 
     /**
@@ -148,7 +182,22 @@ public class EnemyMovement implements Updatable {
      * @param enemyBounds The BoundingBox of all alive enemies.
      */
     public void nextMovement(final Bounds enemyBounds) {
-        crash(); // TODO: H1.6 - remove if implemented
+        setVelocity(getVelocity() + ENEMY_MOVEMENT_SPEED_INCREASE);
+        if (enemyBounds.getMinX() == ORIGINAL_GAME_BOUNDS.getMinX()) {
+            if (getDirection() == Direction.LEFT) {
+                setDirection(Direction.DOWN);
+                setYTarget(VERTICAL_ENEMY_MOVE_DISTANCE);
+            } else if (getDirection() == Direction.DOWN) {
+                setDirection(Direction.RIGHT);
+            }
+        } else if (enemyBounds.getMaxX() == ORIGINAL_GAME_BOUNDS.getMaxX()) {
+            if (getDirection() == Direction.RIGHT) {
+                setDirection(Direction.DOWN);
+                setYTarget(VERTICAL_ENEMY_MOVE_DISTANCE);
+            } else if (getDirection() == Direction.DOWN) {
+                setDirection(Direction.LEFT);
+            }
+        }
     }
 
     /**

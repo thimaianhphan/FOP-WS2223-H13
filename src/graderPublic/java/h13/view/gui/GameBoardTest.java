@@ -198,7 +198,7 @@ public class GameBoardTest extends FxTest {
         final BufferedImage actual = getBufferedImage(renderImage(GameConstants.ORIGINAL_GAME_BOUNDS, graphicsContext.getCanvas()));
         final BufferedImage expected = loadImage("/h13/view/gui/image/GameBoardTest_DrawHUD_"+score+"_"+lives+".png");
 
-        //saveImage("DrawHUD_"+score+"_"+lives, actual);
+//        saveImage("DrawHUD_"+score+"_"+lives, actual);
 
         assertEqualsImage(expected, actual, context);
         //TODO gc.save()?

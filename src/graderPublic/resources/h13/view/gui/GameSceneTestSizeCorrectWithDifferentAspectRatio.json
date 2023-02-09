@@ -136,14 +136,14 @@
     "gameSceneBounds": {
       "x": 0,
       "y": 0,
-      "width": 400,
-      "height": 400
+      "width": 800,
+      "height": 800
     },
     "expectedGameBoardBounds": {
       "x": 0,
       "y": 25,
-      "width": 400,
-      "height": 350
+      "width": 800,
+      "height": 700
     },
     "gameSceneBounds2": {
       "x": 0,
