@@ -16,7 +16,6 @@ import javafx.scene.transform.Scale;
 import org.jetbrains.annotations.Nullable;
 
 import static h13.controller.GameConstants.*;
-import static org.tudalgo.algoutils.student.Student.crash;
 
 
 /**

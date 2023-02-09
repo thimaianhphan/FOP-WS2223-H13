@@ -5,6 +5,8 @@ import h13.controller.gamelogic.EnemyController;
 import h13.controller.gamelogic.GameInputHandler;
 import h13.controller.gamelogic.PlayerController;
 import h13.controller.scene.SceneController;
+import h13.controller.scene.SceneSwitcher;
+import h13.model.HighscoreEntry;
 import h13.model.gameplay.GameState;
 import h13.model.gameplay.Updatable;
 import h13.model.gameplay.sprites.*;
@@ -12,12 +14,16 @@ import h13.view.gui.GameBoard;
 import h13.view.gui.GameScene;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
  * A {@link SceneController} that controls the {@link GameScene}.
@@ -280,7 +286,35 @@ public class GameController extends SceneController implements Updatable {
      * Handles what happens when the {@linkplain Player player} is Defeated.
      */
     private void lose() {
-        crash(); // TODO: H3.1 - remove if implemented
+        Alert loseAlert = new Alert(Alert.AlertType.INFORMATION);
+        loseAlert.setTitle("You lost");
+        loseAlert.setHeaderText("You lost the game!");
+        loseAlert.getButtonTypes().setAll(ButtonType.OK);
+        loseAlert.showAndWait();
+        loseAlert.close();
+
+        TextInputDialog name = new TextInputDialog();
+        name.setTitle("Enter your name");
+        name.setHeaderText("Enter your name so that your scores can be saved in the leaderboard!");
+        name.setContentText("Name: ");
+        String playerName = name.showAndWait().orElse("Anonymous");
+        if (name.isShowing()) name.close();
+
+        ApplicationSettings.getHighscores().add(new HighscoreEntry(playerName, LocalDateTime.now().toString(), getPlayer().getScore()));
+
+        Alert restartAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        restartAlert.setTitle("Restart game");
+        restartAlert.setHeaderText("Do you want to play again?");
+        restartAlert.getButtonTypes().setAll(ButtonType.NO, ButtonType.YES);
+        ButtonType restartButton = restartAlert.showAndWait().orElse(ButtonType.NO);
+        restartAlert.close();
+
+        if (restartButton == ButtonType.YES) reset();
+        else {
+            getGameLoop().stop();
+            SceneSwitcher.loadScene(SceneSwitcher.SceneType.MAIN_MENU, getStage());
+        }
+
     }
 
     /**
@@ -296,7 +330,24 @@ public class GameController extends SceneController implements Updatable {
      */
     private void handleKeyboardInputs() {
         getGameInputHandler().addOnKeyReleased(k -> {
-            crash(); // TODO: H3.1 - remove if implemented
+            switch (k.getCode()) {
+                case ESCAPE -> {
+                    pause();
+
+                    Alert giveUpAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                    giveUpAlert.setHeaderText("Do you want to give up?");
+                    giveUpAlert.setContentText("Choose the following option.");
+
+                    giveUpAlert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+                    ButtonType giveUpButton = giveUpAlert.showAndWait().orElse(ButtonType.NO);
+                    giveUpAlert.close();
+
+                    if (giveUpButton == ButtonType.YES) lose();
+                    else resume();
+                }
+                case F11 -> getStage().setFullScreen(true);
+                default -> resume();
+            }
         });
     }
 
@@ -343,7 +394,24 @@ public class GameController extends SceneController implements Updatable {
      * Calculate the collision between the sprites and damages the collided sprites.
      */
     private void doCollisions() {
-        crash(); // TODO: H3.1 - remove if implemented
+        List<BattleShip> battleShips = getGameState().getSprites()
+            .stream()
+            .filter(s -> s instanceof Enemy || s instanceof Player)
+            .map(s -> (BattleShip) s)
+            .toList();
+        List<Bullet> bullets = getGameState().getSprites()
+            .stream()
+            .filter(s -> s instanceof Bullet)
+            .map(s -> (Bullet) s)
+            .toList();
+        for (Bullet bullet : bullets) {
+            for (BattleShip battleShip : battleShips) {
+                if (bullet.canHit(battleShip)) {
+                    bullet.hit(battleShip);
+                    break;
+                }
+            }
+        }
     }
 
     /**
@@ -352,6 +420,13 @@ public class GameController extends SceneController implements Updatable {
      * @param damaged The damaged sprites.
      */
     public void updatePoints(final List<Sprite> damaged) {
-        crash(); // TODO: H3.1 - remove if implemented
+        int points = 0;
+        List<Enemy> damagedEnemy = damaged.stream()
+            .filter(e -> e instanceof Enemy)
+            .map(e -> (Enemy) e)
+            .filter(Enemy::isDead)
+            .toList();
+        for (Enemy enemy : damagedEnemy) points += enemy.getPointsWorth();
+        getPlayer().setScore(getPlayer().getScore() + points);
     }
 }
