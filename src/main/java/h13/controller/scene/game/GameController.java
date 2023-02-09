@@ -31,7 +31,7 @@ public class GameController extends SceneController implements Updatable {
     /**
      * The {@link GameState} that is our main access point to the model.
      */
-    private final GameState gameState = new GameState();
+    private GameState gameState = new GameState();
 
     /**
      * The {@link GameScene} that is controlled by this {@link GameController}.
@@ -248,9 +248,15 @@ public class GameController extends SceneController implements Updatable {
 
         // register keybindings for the game scene
         handleKeyboardInputs();
+        
+        // reset GameState
+        gameState = new GameState();
 
         // start the game loop
         gameLoop.start();
+        
+        // unpause the game if necessary
+        if (isPaused()) resume();
     }
 
     /**
