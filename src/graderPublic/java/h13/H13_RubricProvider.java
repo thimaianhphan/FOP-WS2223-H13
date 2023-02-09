@@ -225,10 +225,17 @@ public class H13_RubricProvider implements RubricProvider {
                                 "Die Methode drawSprites() ist vollständig korrekt.",
                                 JUnitTestRef.ofMethod(() -> GameBoardTest.class.getDeclaredMethod("testDrawSprites", JsonParameterSet.class))
                             ),
-                            criterion(
-                                "Die Methode drawHUD() ist vollständig korrekt.",
-                                JUnitTestRef.ofMethod(() -> GameBoardTest.class.getDeclaredMethod("testDrawHUD", int.class, int.class))
-                            ),
+                            // This test is Platform-Dependant. If it works, you can be sure that it will work for the Private tests as well
+//                            criterion(
+//                                "Die Methode drawHUD() ist vollständig korrekt.",
+//                                JUnitTestRef.ofMethod(() -> GameBoardTest.class.getDeclaredMethod("testDrawHUD", int.class, int.class))
+//                            ),
+                            Criterion.builder()
+                                .shortDescription("Die Methode drawHUD() ist vollständig korrekt.")
+                                .grader(graderPrivateOnly())
+                                .minPoints(0)
+                                .maxPoints(1)
+                                .build(),
                             criterion(
                                 "Die Methode drawBorder() ist vollständig korrekt.",
                                 JUnitTestRef.ofMethod(() -> GameBoardTest.class.getDeclaredMethod("testDrawBorder", String.class, int.class))
@@ -293,7 +300,7 @@ public class H13_RubricProvider implements RubricProvider {
                         )
                         .build(),
                     Criterion.builder()
-                        .shortDescription("H3.2 | Klasse EnemyController")
+                        .shortDescription("H3.3 | Klasse EnemyController")
                         .addChildCriteria(
                             Criterion.builder()
                                 .shortDescription("Die Methode isDefeated() ist vollständig korrekt.")
