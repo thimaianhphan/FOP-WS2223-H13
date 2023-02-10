@@ -237,6 +237,9 @@ public class GameController extends SceneController implements Updatable {
      * Initializes the {@link #gameScene}.
      */
     private void init() {
+        // reset GameState
+        gameState = new GameState();
+        
         // Keyboard input handler
         setGameInputHandler(new GameInputHandler(getGameScene()));
 
@@ -248,9 +251,6 @@ public class GameController extends SceneController implements Updatable {
 
         // register keybindings for the game scene
         handleKeyboardInputs();
-        
-        // reset GameState
-        gameState = new GameState();
 
         // start the game loop
         gameLoop.start();
