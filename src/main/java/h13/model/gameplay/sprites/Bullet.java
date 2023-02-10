@@ -98,7 +98,6 @@ public class Bullet extends Sprite {
         }
     }
 
-    // TODO: Check if the Bullet is out of bounds and die if it is.
     @Override
     public void update(final double elapsedTime) {
         Bounds newBounds = Utils.getNextPosition(getBounds(), getVelocity(), getDirection(), elapsedTime);

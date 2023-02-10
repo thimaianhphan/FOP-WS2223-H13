@@ -23,10 +23,7 @@ import org.tudalgo.algoutils.tutor.general.assertions.Assertions2;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 import static h13.util.StudentLinks.GameInputHandlerLinks.GameInputHandlerFieldLink.KEYS_PRESSED_FIELD;
@@ -81,6 +78,7 @@ public class PlayerControllerTest {
         player.setKeepShooting(oldShouldKeepShooting);
         final var gameInputHandler = playerController.getGameController().getGameInputHandler();
         KEYS_PRESSED_FIELD.set(context, gameInputHandler, new HashSet<>(keysPressed));
+//        KEYS_PRESSED_FIELD.set(context, gameInputHandler, new LinkedHashSet<>(keysPressed));
         PLAYER_KEY_ACTION_METHOD.invoke(context, playerController, createKeyPresEvent(keysPressed.isEmpty() ? KeyCode.UNDEFINED : keysPressed.get(0)));
         if (testDirection) {
             Assertions2.assertEquals(

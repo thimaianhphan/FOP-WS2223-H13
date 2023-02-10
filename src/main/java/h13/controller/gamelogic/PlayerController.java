@@ -1,11 +1,14 @@
 package h13.controller.gamelogic;
 
+import h13.controller.ApplicationSettings;
 import h13.controller.scene.game.GameController;
+import h13.model.gameplay.Direction;
 import h13.model.gameplay.sprites.Player;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import java.util.Set;
 
 import static h13.controller.GameConstants.*;
-import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
  * A {@link PlayerController} is responsible for instantiating and updating the {@linkplain Player players}.
@@ -76,7 +79,36 @@ public class PlayerController {
      * @param e A {@link KeyEvent} to handle which relates to a Player action.
      */
     private void playerKeyAction(final KeyEvent e) {
-        crash(); // TODO: H3.2 - remove if implemented
+        Set<KeyCode> keyCodeSet = getGameController().getGameInputHandler().getKeysPressed();
+        if (keyCodeSet.size() == 0) {
+            if (getPlayer().isKeepShooting()) getPlayer().setKeepShooting(false);
+            getPlayer().setDirection(Direction.NONE);
+            return;
+        }
+        boolean rightTracker = true, leftTracker = true;
+        for (KeyCode keyCode : keyCodeSet) {
+            if (keyCode != KeyCode.SPACE && getPlayer().isKeepShooting()) getPlayer().setKeepShooting(false);
+            switch (keyCode) {
+                case A, LEFT -> {
+                    rightTracker = false;
+                    if (leftTracker) getPlayer().setDirection(Direction.LEFT);
+                    else {
+                        getPlayer().setDirection(getPlayer().getDirection().combine(Direction.LEFT));
+                        return;
+                    }
+                }
+                case D, RIGHT -> {
+                    leftTracker = false;
+                    if (rightTracker) getPlayer().setDirection(Direction.RIGHT);
+                    else {
+                        getPlayer().setDirection(getPlayer().getDirection().combine(Direction.RIGHT));
+                        return;
+                    }
+                }
+                case SPACE -> getPlayer().setKeepShooting(true);
+                default -> getPlayer().setDirection(Direction.NONE);
+            }
+        }
     }
 
     /**

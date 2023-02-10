@@ -65,6 +65,16 @@ public class SettingsController extends SceneController {
      */
     public Slider gameplayVolumeSlider;
 
+    /**
+     * The slider for the "enemy shooting delay" setting
+     */
+    public Slider enemyShootingDelay;
+
+    /**
+     * The slider for the "enemy shooting probability" setting
+     */
+    public Slider enemyShootingProbability;
+
     @Override
     public String getTitle() {
         return "Space Invaders - Settings";
@@ -73,7 +83,6 @@ public class SettingsController extends SceneController {
     @Override
     public void initStage(final Stage stage) {
         super.initStage(stage);
-
         crash(); // TODO: H4 - remove if implemented
     }
 }

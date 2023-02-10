@@ -254,13 +254,13 @@ public class GameController extends SceneController implements Updatable {
 
         // register keybindings for the game scene
         handleKeyboardInputs();
-        
+
         // reset GameState
         gameState = new GameState();
 
         // start the game loop
         gameLoop.start();
-        
+
         // unpause the game if necessary
         if (isPaused()) resume();
     }
@@ -292,6 +292,7 @@ public class GameController extends SceneController implements Updatable {
      * Handles what happens when the {@linkplain Player player} is Defeated.
      */
     private void lose() {
+        pause();
         Alert loseAlert = new Alert(Alert.AlertType.INFORMATION);
         loseAlert.setTitle("You lost");
         loseAlert.setHeaderText("You lost the game!");

@@ -6,7 +6,6 @@ import h13.model.gameplay.sprites.Bullet;
 import h13.model.gameplay.sprites.Enemy;
 
 import static h13.controller.GameConstants.*;
-import static org.tudalgo.algoutils.student.Student.crash;
 
 /**
  * An {@link EnemyController} is responsible for instantiating and updating the {@linkplain Enemy enemies}.
@@ -56,7 +55,7 @@ public final class EnemyController {
      * @see Enemy#isDead()
      */
     public boolean isDefeated() {
-        return crash(); // TODO: H3.3 - remove if implemented
+        return getGameController().getGameState().getAliveEnemies().size() == 0;
     }
 
     // --Other Methods-- //
