@@ -1,5 +1,6 @@
 package h13.controller.scene.menu;
 
+import h13.controller.ApplicationSettings;
 import h13.controller.scene.SceneController;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Slider;
@@ -75,6 +76,12 @@ public class SettingsController extends SceneController {
      */
     public Slider enemyShootingProbability;
 
+    /**
+     * The checkbox for enabling or disabling autoplay.
+     */
+    public CheckBox autoPlayCheckBox;
+
+
     @Override
     public String getTitle() {
         return "Space Invaders - Settings";
@@ -83,6 +90,13 @@ public class SettingsController extends SceneController {
     @Override
     public void initStage(final Stage stage) {
         super.initStage(stage);
-        crash(); // TODO: H4 - remove if implemented
+
+        fullscreenCheckBox.selectedProperty().bindBidirectional(ApplicationSettings.fullscreenProperty());
+        enemyShootingDelay.valueProperty().bindBidirectional(ApplicationSettings.enemyShootingDelayProperty());
+        enemyShootingProbability.valueProperty().bindBidirectional(ApplicationSettings.enemyShootingProbabilityProperty());
+        loadTexturesCheckBox.selectedProperty().bindBidirectional(ApplicationSettings.loadTexturesProperty());
+        loadBackgroundCheckBox.selectedProperty().bindBidirectional(ApplicationSettings.loadBackgroundProperty());
+        instantShootingCheckBox.selectedProperty().bindBidirectional(ApplicationSettings.instantShootingProperty());
+        autoPlayCheckBox.selectedProperty().bindBidirectional(ApplicationSettings.autoPlayProperty());
     }
 }

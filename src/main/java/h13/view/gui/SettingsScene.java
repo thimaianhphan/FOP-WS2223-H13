@@ -5,6 +5,8 @@ import h13.controller.scene.menu.SettingsController;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 /**
  * The {@link SettingsScene} is a {@link SubMenuScene} that displays the "Settings" menu.
@@ -23,57 +25,72 @@ public class SettingsScene extends SubMenuScene<SettingsController, TabPane> {
      * Initialize the content of the scene.
      */
     private void init() {
-        Tab settingsTab = new Tab("Settings");
-        settingsTab.setClosable(false);
+        final var tabPane = getContentRoot();
+        tabPane.setPrefSize(200, 200);
+        final var gameplayTab = new Tab("Gameplay");
+        final var graphicsTab = new Tab("Graphics");
+        final var audioTab = new Tab("Audio");
 
-        //gridPane
-        GridPane gridPane = new GridPane();
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.setPadding(new Insets(10, 10, 10, 10));
+        tabPane.getTabs().addAll(gameplayTab, graphicsTab);
 
-        gridPane.prefHeightProperty().bind(getContentRoot().heightProperty());
-        gridPane.prefWidthProperty().bind(getContentRoot().widthProperty());
+        final var gameplayVBox = new VBox();
+        gameplayVBox.setPrefSize(200, 180);
+        gameplayVBox.setSpacing(10);
+        gameplayVBox.setAlignment(javafx.geometry.Pos.CENTER);
+        gameplayVBox.getChildren().add(getController().instantShootingCheckBox = new CheckBox("Instant Shooting"));
+        final var enemyShootingDelayHBox = new HBox();
+        enemyShootingDelayHBox.setAlignment(javafx.geometry.Pos.CENTER);
+        final var enemyShootingDelaySlider = new Slider(0,10000,2000);
+        enemyShootingDelayHBox.getChildren().add(enemyShootingDelaySlider);
+        enemyShootingDelaySlider.setShowTickLabels(true);
+        enemyShootingDelaySlider.setShowTickMarks(true);
+        enemyShootingDelaySlider.setMajorTickUnit(1000);
+        enemyShootingDelaySlider.setMinorTickCount(100);
+        enemyShootingDelaySlider.setBlockIncrement(100);
+        final var enemyShootingDelayLabel = new Label("Enemy Shooting Delay: " + enemyShootingDelaySlider.getValue());
+        enemyShootingDelayHBox.getChildren().add(enemyShootingDelayLabel);
+        enemyShootingDelayLabel.textProperty().bind(enemyShootingDelaySlider.valueProperty().asString("Enemy Shooting Delay: %.0fms"));
+        getController().enemyShootingDelay = enemyShootingDelaySlider;
+        gameplayVBox.getChildren().add(enemyShootingDelayHBox);
+        final var enemyShootingProbabilityHBox = new HBox();
+        enemyShootingProbabilityHBox.setAlignment(javafx.geometry.Pos.CENTER);
+        final var enemyShootingProbabilitySlider = new Slider(0,1, 0.0005);
+        enemyShootingProbabilityHBox.getChildren().add(enemyShootingProbabilitySlider);
+        enemyShootingProbabilitySlider.setBlockIncrement(0.01);
+        final var enemyShootingProbabilityLabel = new Label("Enemy Shooting Probability: " + enemyShootingProbabilitySlider.getValue());
+        enemyShootingProbabilityHBox.getChildren().add(enemyShootingProbabilityLabel);
+        enemyShootingProbabilityLabel.textProperty().bind(enemyShootingProbabilitySlider.valueProperty().asString("Enemy Shooting Probability: %.4f"));
+        getController().enemyShootingProbability = enemyShootingProbabilitySlider;
+        gameplayVBox.getChildren().add(enemyShootingProbabilityHBox);
+        final var autoPlayCheckBox = new CheckBox("Enable Auto Play");
+        getController().autoPlayCheckBox = autoPlayCheckBox;
+        gameplayVBox.getChildren().add(autoPlayCheckBox);
+        gameplayTab.setContent(gameplayVBox);
 
-        //checkbox for instant shooting of player
-        getController().instantShootingCheckBox = new CheckBox("Player's instant shooting");
-        gridPane.add(getController().instantShootingCheckBox, 0, 0);
-        getController().instantShootingCheckBox.selectedProperty().bindBidirectional(ApplicationSettings.instantShootingProperty());
+        final var graphicsVBox = new VBox();
+        graphicsVBox.setPrefSize(200, 180);
+        graphicsVBox.setSpacing(10);
+        graphicsVBox.setAlignment(javafx.geometry.Pos.CENTER);
+        graphicsVBox.getChildren().add(getController().loadTexturesCheckBox = new CheckBox("Load Textures"));
+        graphicsVBox.getChildren().add(getController().loadBackgroundCheckBox = new CheckBox("Load Background"));
+        graphicsVBox.getChildren().add(getController().fullscreenCheckBox = new CheckBox("FullScreen"));
+        graphicsTab.setContent(graphicsVBox);
 
-
-        //slider for minimal shooting interval of enemy
-        Label enemyShootingDelayLabel = new Label("Enemy's minimal shooting interval");
-        gridPane.add(enemyShootingDelayLabel, 0, 1);
-        getController().enemyShootingDelay = new Slider();
-        getController().enemyShootingDelay.setMin(0);
-        getController().enemyShootingDelay.setMax(1000000);
-        getController().enemyShootingDelay.setValue(ApplicationSettings.enemyShootingDelayProperty().getValue());
-        gridPane.add(getController().enemyShootingDelay, 1, 1);
-        getController().enemyShootingDelay.valueProperty().bindBidirectional(ApplicationSettings.enemyShootingDelayProperty());
-
-        //slider for shooting probability of enemy
-        Label enemyShootingProbabilityLabel = new Label("Enemy's shooting probability");
-        gridPane.add(enemyShootingProbabilityLabel, 0, 2);
-        getController().enemyShootingProbability = new Slider();
-        getController().enemyShootingProbability.setMin(0);
-        getController().enemyShootingProbability.setMax(1);
-        getController().enemyShootingProbability.setValue(ApplicationSettings.enemyShootingProbability.getValue());
-        gridPane.add(getController().enemyShootingProbability, 1, 2);
-        getController().enemyShootingProbability.valueProperty().bindBidirectional(ApplicationSettings.enemyShootingProbabilityProperty());
-
-        //checkbox for full screen mode
-        getController().fullscreenCheckBox = new CheckBox("Start game at full screen mode");
-        gridPane.add(getController().fullscreenCheckBox, 0, 3);
-        getController().fullscreenCheckBox.selectedProperty().bindBidirectional(ApplicationSettings.fullscreenProperty());
-
-        //checkbox for textures loading
-        getController().loadTexturesCheckBox = new CheckBox("Load texture of sprites");
-        gridPane.add(getController().loadTexturesCheckBox, 0, 4);
-        getController().loadTexturesCheckBox.selectedProperty().bindBidirectional(ApplicationSettings.loadTexturesProperty());
-
-        //checkbox for background loading
-        getController().loadBackgroundCheckBox = new CheckBox("Load background");
-        gridPane.add(getController().loadBackgroundCheckBox, 0, 5);
-        getController().loadBackgroundCheckBox.selectedProperty().bindBidirectional(ApplicationSettings.loadBackgroundProperty());
+        final var audioVBox = new VBox();
+        audioVBox.setPrefSize(200, 180);
+        audioVBox.setSpacing(10);
+        audioVBox.setAlignment(javafx.geometry.Pos.CENTER);
+        audioVBox.getChildren().add(getController().enableSoundCheckBox = new CheckBox("Enable Sound"));
+        final var musicVolumeHBox = new HBox();
+        musicVolumeHBox.setAlignment(javafx.geometry.Pos.CENTER);
+        musicVolumeHBox.getChildren().add(getController().musicVolumeSlider = new Slider());
+        musicVolumeHBox.getChildren().add(new Label("Music Volume"));
+        audioVBox.getChildren().add(musicVolumeHBox);
+        final var gameplayVolumeHBox = new HBox();
+        gameplayVolumeHBox.setAlignment(javafx.geometry.Pos.CENTER);
+        gameplayVolumeHBox.getChildren().add(getController().gameplayVolumeSlider = new Slider());
+        gameplayVolumeHBox.getChildren().add(new Label("Gameplay Volume"));
+        audioVBox.getChildren().add(gameplayVolumeHBox);
+        audioTab.setContent(audioVBox);
     }
 }

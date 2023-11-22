@@ -165,6 +165,7 @@ public class GameBoard extends Canvas implements Updatable {
         Text scoreDisplayText = new Text("Score: " + score);
         Text healthDisplayText = new Text("Lives: " + health);
         gc.setFont(HUD_FONT);
+        gc.setFill(HUD_TEXT_COLOR);
         scoreDisplayText.setFont(HUD_FONT);
         healthDisplayText.setFont(HUD_FONT);
         gc.fillText(scoreDisplayText.getText(), HUD_PADDING, scoreDisplayText.getLayoutBounds().getHeight() + HUD_PADDING);

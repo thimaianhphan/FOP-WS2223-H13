@@ -4,9 +4,7 @@ import h13.controller.ApplicationSettings;
 import h13.model.gameplay.Direction;
 import h13.model.gameplay.GameState;
 import javafx.scene.paint.Color;
-import java.util.concurrent.TimeUnit;
 
-import static h13.controller.GameConstants.ENEMY_SHOOTING_PROBABILITY;
 
 /**
  * An {@link Enemy} is a {@link BattleShip} that is moved by the {@link h13.controller.gamelogic.EnemyController} and shoots downwards.
@@ -28,7 +26,7 @@ public class Enemy extends BattleShip {
      * The amount of points the enemy is worth when it is destroyed.
      */
     private final int pointsWorth;
-    private long timeOfLastShot = 0;
+    private double timeOfLastShot = ApplicationSettings.enemyShootingDelayProperty().get(); // default: 2 seconds
 
     // --Constructors-- //
 
@@ -97,11 +95,16 @@ public class Enemy extends BattleShip {
     @Override
     public void update(final double elapsedTime) {
         super.update(elapsedTime);
-        long currentTime = System.currentTimeMillis();
-        if (currentTime - timeOfLastShot >= ApplicationSettings.enemyShootingDelayProperty().longValue())
-            if (Math.random() <= ApplicationSettings.enemyShootingProbability.get()) {
-                timeOfLastShot = System.currentTimeMillis();
+
+        // Shoot with a certain probability
+        timeOfLastShot -= elapsedTime * 1000;
+        if (timeOfLastShot <= 0) {
+            // Shoot at random intervals
+            final var random = Math.random();
+            if (random < ApplicationSettings.enemyShootingProbabilityProperty().get()) {
                 shoot();
+                timeOfLastShot = ApplicationSettings.enemyShootingDelayProperty().get();
+            }
         }
     }
 }

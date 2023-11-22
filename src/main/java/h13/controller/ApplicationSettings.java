@@ -5,11 +5,14 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.List;
+
 /**
  * A Data class that contains the settings of the application.
  * Also handles saving and loading of the settings from the filesystem.
  */
 public final class ApplicationSettings {
+    private static final BooleanProperty autoPlay = new SimpleBooleanProperty(false);
     // --Constructors-- //
 
     /**
@@ -154,5 +157,9 @@ public final class ApplicationSettings {
      */
     public static ObservableList<HighscoreEntry> getHighscores() {
         return highscores;
+    }
+
+    public static BooleanProperty autoPlayProperty() {
+        return autoPlay;
     }
 }

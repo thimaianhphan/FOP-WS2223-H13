@@ -104,13 +104,13 @@ public class BattleShip extends Sprite {
      * @param direction The {@link Direction} to shoot the {@link Bullet} towards.
      */
     protected void shoot(final Direction direction) {
-        if (hasBullet() && ApplicationSettings.instantShootingProperty().get()) {
-            Bullet newBullet = new Bullet((getX() + getWidth() - BULLET_WIDTH) / 2.0, (getY() + getHeight() - BULLET_HEIGHT) / 2.0, getGameState(), this, direction);
-            getGameState().getToAdd().add(newBullet);
-        } else if (!hasBullet()) {
-            Bullet newBullet = new Bullet((getX() + getWidth() - BULLET_WIDTH) / 2.0, (getY() + getHeight() - BULLET_HEIGHT) / 2.0, getGameState(), this, direction);
-            setBullet(newBullet);
-            getGameState().getToAdd().add(newBullet);
+        if (hasBullet() && !ApplicationSettings.instantShootingProperty().get()) {
+            return;
         }
+
+        final var bullet = new Bullet(getBounds().getCenterX() - BULLET_WIDTH / 2, getBounds().getCenterY() - BULLET_HEIGHT / 2, getGameState(), this, direction);
+
+        setBullet(bullet);
+        getGameState().getToAdd().add(bullet);
     }
 }
